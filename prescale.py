@@ -1,9 +1,9 @@
 # Create python code to set the capacity for an existing OCI compute reservation
 import oci
 
-RESERVATION1 = "ocid1.capacityreservation.oc1.iad.anuwcljrfvqkqmqcfi6nj63ny42ruro3dbrplk744vkmgmhb4hanviiujaeq"
-RESERVATION2 = "ocid1.capacityreservation.oc1.iad.anuwcljsfvqkqmqcifpeykpgnobpumjw6ja2fxhqnjwxypt7oft2qmphkp6a"
-RESERVATION3 = "ocid1.capacityreservation.oc1.iad.anuwcljtfvqkqmqckwdmidgsaxonmqbtxnpcl4ckqvprvh2tm4y7n2reqeeq"
+RESERVATION1 = "ocid1......."
+RESERVATION2 = "ocid1......."
+RESERVATION3 = "ocid1......."
 
 reservationCount = 3    # Number of reservations to monitor
 desiredCapacity = 100   # Desired capacity to reach
