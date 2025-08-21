@@ -19,7 +19,7 @@ The capacity request is rounded up to the next integar.
 ### Updating the script
 Update the reservation OCIDs to reflect the reservations in your account
 
-```
+```python
 RESERVATION1 = "ocid1......."
 RESERVATION2 = "ocid1......."
 RESERVATION3 = "ocid1......."
@@ -27,7 +27,7 @@ RESERVATION3 = "ocid1......."
 
 Update the parameters to control the script behavior
 
-```
+```python
 reservationCount = 3    # Number of reservations to monitor
 desiredCapacity = 100   # Desired total capacity to reach
 minimumCapacity = 90    # Minimum capacity acceptable
@@ -36,6 +36,7 @@ maximumTests = 10       # Maximum number of times we will check each reservation
 ```
 
 ### Output
+```json
 {
     'capacityMode': 'Desired', 
     'reservationCount': 3, 
@@ -44,6 +45,7 @@ maximumTests = 10       # Maximum number of times we will check each reservation
     'perADCapacity': 35, 
     'safeCapacity': 105
 }
+```
 
 Capacity mode will be one of the following options:
 * Desired - At least the desired number of nodes were reserved
