@@ -11,7 +11,7 @@ minimumCapacity = 90    # Minimum capacity acceptable
 checkInterval = 1       # Interval in seconds to check the capacity
 maximumTests = 10       # Maximum number of times we will check each reservation before giving up.
 
-def getStatringCapacity(reservation_id):
+def getStartingCapacity(reservation_id):
         # Initialize the OCI client from the instance configuration
     config = oci.config.from_file()  # Assumes default config file at ~/.oci/config
     compute_client = oci.core.ComputeClient(config)
@@ -68,11 +68,11 @@ print(f"Setting {perAdMinimumCapacity} capacity for each reservation.")
 # Get the starting capacity for each reservation
 # so thaat we can calculate how much to add.
 #
-startingCapacity1 = getStatringCapacity(RESERVATION1)
+startingCapacity1 = getStartingCapacity(RESERVATION1)
 if (reservationCount > 1):
-    startingCapacity2 = getStatringCapacity(RESERVATION2)
+    startingCapacity2 = getStartingCapacity(RESERVATION2)
 if (reservationCount > 2):
-    startingCapacity3 = getStatringCapacity(RESERVATION3)
+    startingCapacity3 = getStartingCapacity(RESERVATION3)
 #
 # Calculate the new desired capacity for each reservation
 #
