@@ -104,9 +104,39 @@ if (reservationCount > 1):
 if (reservationCount > 2):
     updatedCapacity3 = watch_compute_reservation_capacity(RESERVATION3, desiredCapacity3, minimumCapacity3, checkInterval, maximumTests)    
 
-print(f"Updated capacity for reservation 1: {updatedCapacity1}")
+addedCapacity1 = updatedCapacity1 - startingCapacity1
 if (reservationCount > 1):
-    print(f"Updated capacity for reservation 2: {updatedCapacity2}")
+    addedCapacity2 = updatedCapacity2 - startingCapacity2
 if (reservationCount > 2):
-    print(f"Updated capacity for reservation 3: {updatedCapacity3}")
-print("Capacity update complete.")
+    addedCapacity3 = updatedCapacity3 - startingCapacity3
+
+
+#
+# Determine the save capacity for the cluster
+#
+# How much capacity have we added to AD1?
+perADCapacity = addedCapacity1
+if (reservationCount > 1):
+    if (addedCapacity2 < perADCapacity):
+        perADCapacity = addedCapacity2
+if (reservationCount > 2):
+    if (addedCapacity3 < perADCapacity):
+        perADCapacity = addedCapacity3
+
+safeCapacity = perADCapacity * reservationCount
+
+if (safeCapacity >= desiredCapacity):
+    capacityMode = "Desired"
+elif (safeCapacity >= minimumCapacity):
+    capacityMode = "Minimum"
+else:
+    capacityMode = "Failed"
+
+outputData = {
+    "capacityMode": capacityMode,
+    "reservationCount": reservationCount,
+    "desiredCapacity": desiredCapacity,
+    "minimumCapacity": minimumCapacity1,
+    "perADCapacity": perADCapacity,
+    "safeCapacity": safeCapacity
+}

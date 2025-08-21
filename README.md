@@ -1,6 +1,6 @@
 # OKE Node Pool Pre-Warmer
 
-Python script designed to grab capacity to your account for a nodepool to leverage using self-service capacity reservations.
+Python script designed to grab capacity to your account for an OKE Nodepool to leverage using self-service capacity reservations.
 
 ## Business Problem
 You want to be able to scale up your OKE Node pools, hwoever you want to ensure capacity before your job kicks off. You do not want to risk having an out of capacity issue during the execution of your job.
