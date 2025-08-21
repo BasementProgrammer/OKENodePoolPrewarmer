@@ -6,7 +6,7 @@ RESERVATION2 = "ocid1......."
 RESERVATION3 = "ocid1......."
 
 reservationCount = 3    # Number of reservations to monitor
-desiredCapacity = 100   # Desired capacity to reach
+desiredCapacity = 100   # Desired total capacity to reach
 minimumCapacity = 90    # Minimum capacity acceptable
 checkInterval = 1       # Interval in seconds to check the capacity
 maximumTests = 10       # Maximum number of times we will check each reservation before giving up.
