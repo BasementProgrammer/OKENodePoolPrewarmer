@@ -4,32 +4,41 @@ import time
 
 
 def printUssage():
+    print("NodePoolStepper - Python tool to stagger the scale up of an OKE node pool.")
+    print("")
+    print("This will add nodes to the node pool in steps, reducing the impoct to other services such as OCIR and Onject Storage")
+    print("For nodes that have cloud init script that hit these services a lot.")
+    print("")
     print("Usage: NodePoolStepper.py NodePoolID DesiredSize StepSize StepTime")
     print("  NodePoolID - The OCID of the node pool to step up.")
-    print("  DesiredSize - The desired end size for the nodepool.")
+    print("  AdditionalCapacity - The number of nodes to add to the pool.")
     print("  StepSize - The numner of nodes to add in each step.")
-    print("  StepTime - The time to wait between steps.")
+    print("  StepTime - The time to wait between checks.")
     print("Example: NodePoolStepper.py ocid1.nodepool.oc1..aaaaaaaaxxxxx 500 100 30")
+    print("")
 
-#if (len(sys.argv) != 5):
-#    printUssage()
-#    exit(1)
+if (len(sys.argv) != 5):
+    printUssage()
+    exit(1)
 
-#NodePoolId = sys.argv[1]
-#DesiredSize = int(sys.argv[2])
-#StepSize = int(sys.argv[3])
-#StepTime = int(sys.argv[4])
+NodePoolId = sys.argv[1]
+AdditionalCapacity = int(sys.argv[2])
+StepSize = int(sys.argv[3])
+StepTime = int(sys.argv[4])
 
-NodePoolId = "ocid1.nodepool.oc1.iad.aaaaaaaaxofwp75trs3ia2w3yhcs3q77ic22en75qshuy46dlnxmelhl2lca"
-AdditionalCapacity = 100
-StepSize = 10
-StepTime = 10
+#NodePoolId = "ocid1.nodepool.oc1......"
+#AdditionalCapacity = 100
+#StepSize = 10
+#StepTime = 10
 
 config = oci.config.from_file()  # Assumes default config file at ~/.oci/config
 container_client = oci.container_engine.ContainerEngineClient(config)
 
 steps = int(AdditionalCapacity / StepSize + .9)  # Round to nearest integer
-print(f"Stepping up to an additional {AdditionalCapacity} nodes in {steps} steps of {StepSize} nodes every {StepTime} seconds.")
+print(f"Stepping up node pool: {NodePoolId}.")
+print(f"Adding an additional {AdditionalCapacity} nodes in {steps} steps of {StepSize} nodes every {StepTime} seconds.")
+
+
 
 nodePoolDetails = container_client.get_node_pool(NodePoolId).data
 currentSize = nodePoolDetails.node_config_details.size
