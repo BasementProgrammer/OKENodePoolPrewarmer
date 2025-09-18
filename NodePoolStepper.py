@@ -26,13 +26,17 @@ AdditionalCapacity = int(sys.argv[2])
 StepSize = int(sys.argv[3])
 StepTime = int(sys.argv[4])
 
-#NodePoolId = "ocid1.nodepool.oc1......"
-#AdditionalCapacity = 100
-#StepSize = 10
-#StepTime = 10
+#NodePoolId = "ocid1.nodepool"
+#AdditionalCapacity = 10
+#StepSize = 2
+#StepTime = 5
 
 config = oci.config.from_file()  # Assumes default config file at ~/.oci/config
 container_client = oci.container_engine.ContainerEngineClient(config)
+
+# By default this will hit the auth service in the region the instance is running.
+#signer = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
+#container_client = oci.container_engine.ContainerEngineClient(config={}, signer=signer)
 
 steps = int(AdditionalCapacity / StepSize + .9)  # Round to nearest integer
 print(f"Stepping up node pool: {NodePoolId}.")
